@@ -1,14 +1,36 @@
-<div class="container-fluid" ng-app="app">
-  <div class="panel panel-success">
-    <div class="panel-heading">
-      <h1 ng-if="name">Hello, {{name}}</h1>
+<div ng-app="app">
+  <div ng-controller="UsersController" layout="column" layout-align="center center">
+
+    <div  layout="column" style="margin-top: 100px">
+      <div ng-show="name" layout="row" layout-align="center">
+        <h1>Hello, {{name}}</h1>
+      </div>
+
+      <div>
+
+        <md-input-container>
+          <label>Enter your name</label>
+          <input ng-model="name">
+        </md-input-container>
+      </div>
+
+      <div layout="row" layout-align="center">
+        <md-button class="md-raised" ng-click="save()">Submit</md-button>
+      </div>
     </div>
-    <div class="panel-body">
-      <form class="form-inline">
-        <div class="form-group">
-          <input class="form-control" type="text" placeholder="Enter your name" autofocus ng-model="name">
-        </div>
-      </form>
+
+
+
+    <div layout="column">
+      <h4>User List : </h4>
+      <div layout="row" ng-repeat="user in users">
+        <p >- {{ user.name }}</p>
+        <md-button class="md-icon-button" aria-label="More">
+          <md-icon md-svg-icon="/home/jules/isichat-server/app/views/img/icons/ic_more_vert_black_24px.svg"></md-icon>
+        </md-button>
+      </div>
+
     </div>
+
   </div>
 </div>
