@@ -17,4 +17,5 @@
 //= require angular-aria/angular-aria
 //= require angular-animate/angular-animate
 //= require angular-material/angular-material
+//= require angular-hotkeys/build/hotkeys
 //= require_tree .

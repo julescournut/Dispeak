@@ -3,6 +3,7 @@
   "dependencies": {
     "angular": "latest",
     "angular-material": "latest",
-    "angular-resource": "latest"
+    "angular-resource": "latest",
+    "angular-hotkeys": "git://github.com/chieffancypants/angular-hotkeys#1.7.0"
   }
 }
