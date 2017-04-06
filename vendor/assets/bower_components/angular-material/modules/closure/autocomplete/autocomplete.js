@@ -648,7 +648,7 @@ function MdAutocompleteCtrl ($scope, $element, $mdUtil, $mdConstant, $mdTheming,
   }
 
   /**
-   * Returns the locals object for compiling item templates.
+   * Returns the locals object for compiling item partials.
    * @param item
    * @returns {{}}
    */

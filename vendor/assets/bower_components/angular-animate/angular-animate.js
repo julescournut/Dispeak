@@ -2263,17 +2263,17 @@ var $$AnimateQueueProvider = ['$animateProvider', /** @this */ function($animate
       };
     }
 
-    // Wait until all directive and route-related templates are downloaded and
+    // Wait until all directive and route-related partials are downloaded and
     // compiled. The $templateRequest.totalPendingRequests variable keeps track of
-    // all of the remote templates being currently downloaded. If there are no
-    // templates currently downloading then the watcher will still fire anyway.
+    // all of the remote partials being currently downloaded. If there are no
+    // partials currently downloading then the watcher will still fire anyway.
     var deregisterWatch = $rootScope.$watch(
       function() { return $templateRequest.totalPendingRequests === 0; },
       function(isEmpty) {
         if (!isEmpty) return;
         deregisterWatch();
 
-        // Now that all templates have been downloaded, $animate will wait until
+        // Now that all partials have been downloaded, $animate will wait until
         // the post digest queue is empty before enabling animations. By having two
         // calls to $postDigest calls we can ensure that the flag is enabled at the
         // very end of the post digest queue. Since all of the animations in $animate

@@ -55,5 +55,6 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'sprockets'
 gem 'rack-cors'
 gem 'bower-rails'
+gem 'angular-rails-templates'
 
 ruby "2.3.1"

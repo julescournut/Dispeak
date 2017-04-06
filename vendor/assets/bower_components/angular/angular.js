@@ -6695,7 +6695,7 @@ function $CacheFactoryProvider() {
        * @description
        * A cache object used to store and retrieve data, primarily used by
        * {@link $http $http} and the {@link ng.directive:script script} directive to cache
-       * templates and other data.
+       * partials and other data.
        *
        * ```js
        *  angular.module('superCache')
@@ -6949,7 +6949,7 @@ function $CacheFactoryProvider() {
  *
  * @description
  * The first time a template is used, it is loaded in the template cache for quick retrieval. You
- * can load templates directly into the cache in a `script` tag, or by consuming the
+ * can load partials directly into the cache in a `script` tag, or by consuming the
  * `$templateCache` service directly.
  *
  * Adding via the `script` tag:
@@ -6990,7 +6990,7 @@ function $CacheFactoryProvider() {
  */
 function $TemplateCacheProvider() {
   this.$get = ['$cacheFactory', function($cacheFactory) {
-    return $cacheFactory('templates');
+    return $cacheFactory('partials');
   }];
 }
 
@@ -9314,7 +9314,7 @@ function $CompileProvider($provide, $$sanitizeUriProvider) {
 
     /**
      * Once the directives have been collected, their compile functions are executed. This method
-     * is responsible for inlining directive templates as well as terminating the application
+     * is responsible for inlining directive partials as well as terminating the application
      * of the directives if the terminal directive has been reached.
      *
      * @param {Array} directives Array of collected directives to execute their compile function.
@@ -9380,7 +9380,7 @@ function $CompileProvider($provide, $$sanitizeUriProvider) {
 
         if (directiveValue) {
 
-          // skip the check for directives with async templates, we'll check the derived sync
+          // skip the check for directives with async partials, we'll check the derived sync
           // directive when the template arrives
           if (!directive.templateUrl) {
             if (isObject(directiveValue)) {
@@ -9467,7 +9467,7 @@ function $CompileProvider($provide, $$sanitizeUriProvider) {
                                         replaceDirective && replaceDirective.name, {
                                           // Don't pass in:
                                           // - controllerDirectives - otherwise we'll create duplicates controllers
-                                          // - newIsolateScopeDirective or templateDirective - combining templates with
+                                          // - newIsolateScopeDirective or templateDirective - combining partials with
                                           //   element transclusion doesn't make sense.
                                           //
                                           // We need only nonTlbTranscludeDirective so that we prevent putting transclusion
@@ -18774,7 +18774,7 @@ function adjustMatchers(matchers) {
  * can override it completely to change the behavior of `$sce`, the common case would
  * involve configuring the {@link ng.$sceDelegateProvider $sceDelegateProvider} instead by setting
  * your own whitelists and blacklists for trusting URLs used for loading AngularJS resources such as
- * templates.  Refer {@link ng.$sceDelegateProvider#resourceUrlWhitelist
+ * partials.  Refer {@link ng.$sceDelegateProvider#resourceUrlWhitelist
  * $sceDelegateProvider.resourceUrlWhitelist} and {@link
  * ng.$sceDelegateProvider#resourceUrlBlacklist $sceDelegateProvider.resourceUrlBlacklist}
  */
@@ -18790,7 +18790,7 @@ function adjustMatchers(matchers) {
  * $sceDelegate service}, used as a delegate for {@link ng.$sce Strict Contextual Escaping (SCE)}.
  *
  * The `$sceDelegateProvider` allows one to get/set the whitelists and blacklists used to ensure
- * that the URLs used for sourcing AngularJS templates and other script-running URLs are safe (all
+ * that the URLs used for sourcing AngularJS partials and other script-running URLs are safe (all
  * places that use the `$sce.RESOURCE_URL` context). See
  * {@link ng.$sceDelegateProvider#resourceUrlWhitelist $sceDelegateProvider.resourceUrlWhitelist}
  * and
@@ -18802,7 +18802,7 @@ function adjustMatchers(matchers) {
  * **Example**:  Consider the following case. <a name="example"></a>
  *
  * - your app is hosted at url `http://myapp.example.com/`
- * - but some of your templates are hosted on other domains you control such as
+ * - but some of your partials are hosted on other domains you control such as
  *   `http://srv01.assets.example.com/`, `http://srv02.assets.example.com/`, etc.
  * - and you have an open redirect at `http://myapp.example.com/clickThru?...`.
  *
@@ -18824,10 +18824,10 @@ function adjustMatchers(matchers) {
  *  });
  * ```
  * Note that an empty whitelist will block every resource URL from being loaded, and will require
- * you to manually mark each one as trusted with `$sce.trustAsResourceUrl`. However, templates
+ * you to manually mark each one as trusted with `$sce.trustAsResourceUrl`. However, partials
  * requested by {@link ng.$templateRequest $templateRequest} that are present in
  * {@link ng.$templateCache $templateCache} will not go through this check. If you have a mechanism
- * to populate your templates in that cache at config time, then it is a good idea to remove 'self'
+ * to populate your partials in that cache at config time, then it is a good idea to remove 'self'
  * from that whitelist. This helps to mitigate the security impact of certain types of issues, like
  * for instance attacker-controlled `ng-includes`.
  */
@@ -19956,7 +19956,7 @@ function $TemplateRequestProvider() {
       function handleRequestFn(tpl, ignoreRequestError) {
         handleRequestFn.totalPendingRequests++;
 
-        // We consider the template cache holds only trusted templates, so
+        // We consider the template cache holds only trusted partials, so
         // there's no need to go through whitelisting again for keys that already
         // are included in there. This also makes Angular accept any script
         // directive, no matter its name. However, we still need to unwrap trusted

@@ -15,7 +15,7 @@ var jqLite;
  * @name ngMessages
  * @description
  *
- * The `ngMessages` module provides enhanced support for displaying messages within templates
+ * The `ngMessages` module provides enhanced support for displaying messages within partials
  * (typically within forms or when rendering message objects that return key/value data).
  * Instead of relying on JavaScript code and/or complex ng-if statements within your form template to
  * show and hide error messages specific to the state of an input field, the `ngMessages` and

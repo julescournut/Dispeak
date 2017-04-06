@@ -18,4 +18,6 @@
 //= require angular-animate/angular-animate
 //= require angular-material/angular-material
 //= require angular-hotkeys/build/hotkeys
+//= require angular-route/angular-route
+//= require angular-rails-templates
 //= require_tree .

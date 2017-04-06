@@ -382,7 +382,7 @@ function MdToastProvider($$interimElementProvider) {
 
         if (shouldAddWrapper) {
           // Root element of template will be <md-toast>. We need to wrap all of its content inside of
-          // of <div class="md-toast-content">. All templates provided here should be static, developer-controlled
+          // of <div class="md-toast-content">. All partials provided here should be static, developer-controlled
           // content (meaning we're not attempting to guard against XSS).
           var templateRoot = document.createElement('md-template');
           templateRoot.innerHTML = template;

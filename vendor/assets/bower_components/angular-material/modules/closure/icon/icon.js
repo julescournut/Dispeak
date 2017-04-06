@@ -48,7 +48,7 @@ angular
  * `md-icon` makes it easier to use SVG icons by *inlining* the SVG into an `<svg>` element in the
  * document. The most straightforward way of referencing an SVG icon is via URL, just like a
  * traditional `<img>`. `$mdIconProvider`, as a convenience, lets you _name_ an icon so you can
- * reference it by name instead of URL throughout your templates.
+ * reference it by name instead of URL throughout your partials.
  *
  * Additionally, you may not want to make separate HTTP requests for every icon, so you can bundle
  * your SVG icons together and pre-load them with $mdIconProvider as an icon set. An icon set can
@@ -68,7 +68,7 @@ angular
  *   using its textual name _or_ numerical character reference. Note that `material-icons` is the default fontset when
  *   none is specified.
  * </li>
- * <li> Use any of the following templates: <br/>
+ * <li> Use any of the following partials: <br/>
  *   <ul>
  *     <li>`<md-icon md-font-icon="classname"></md-icon>`</li>
  *     <li>`<md-icon md-font-set="font library classname or alias">textual_name</md-icon>`</li>

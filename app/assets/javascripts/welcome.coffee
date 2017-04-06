@@ -4,8 +4,36 @@
 app = angular.module('app',[
   'ngMaterial',
   'ngResource',
-  'cfp.hotkeys'
+  'cfp.hotkeys',
+  'ngRoute',
+  'templates'
 ])
+
+app.config([
+  '$routeProvider',
+  '$mdThemingProvider',
+  ($routeProvider, $mdThemingProvider) ->
+
+    $routeProvider
+      .when '/login',
+        templateUrl: 'login.html'
+        controller: 'UsersController'
+
+    pastBlueMap = $mdThemingProvider.extendPalette 'blue', {
+      '500': '#5F767F',
+      'contrastDefaultColor': 'dark'
+    }
+
+    $mdThemingProvider
+      .definePalette 'pastBlue', pastBlueMap
+
+    $mdThemingProvider
+      .theme 'default'
+      .primaryPalette 'pastBlue',
+        'default': '500'
+
+]);
+
 
 app.controller('UsersController', [ '$scope' , '$resource', 'hotkeys' , ($scope, $resource, hotkeys)->
   User = $resource('/users/:userId', { userId : "@id", format: 'json'},
@@ -23,6 +51,8 @@ app.controller('UsersController', [ '$scope' , '$resource', 'hotkeys' , ($scope,
 
 
 ])
+
+
 
 
 

@@ -1192,7 +1192,7 @@ MdChipsCtrl.prototype.contentIdFor = function(index) {
    * displayed as 'chips'. This component can make use of an `<input>` element or an 
    * `<md-autocomplete>` element.
    *
-   * ### Custom templates
+   * ### Custom partials
    * A custom template may be provided to render the content of each chip. This is achieved by
    * specifying an `<md-chip-template>` element containing the custom content as a child of
    * `<md-chips>`.
@@ -1423,7 +1423,7 @@ MdChipsCtrl.prototype.contentIdFor = function(index) {
    * MDChips Directive Definition
    */
   function MdChips ($mdTheming, $mdUtil, $compile, $log, $timeout, $$mdSvgRegistry) {
-    // Run our templates through $mdUtil.processTemplate() to allow custom start/end symbols
+    // Run our partials through $mdUtil.processTemplate() to allow custom start/end symbols
     var templates = getTemplates();
 
     return {
@@ -1505,7 +1505,7 @@ MdChipsCtrl.prototype.contentIdFor = function(index) {
         })
         .join(',');
 
-      // Set the chip remove, chip contents and chip input templates. The link function will put
+      // Set the chip remove, chip contents and chip input partials. The link function will put
       // them on the scope for transclusion later.
       var chipRemoveTemplate   = getTemplateByQuery(chipRemoveSelector) || templates.remove,
           chipContentsTemplate = chipTemplate || templates.default,
