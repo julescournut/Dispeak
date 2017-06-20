@@ -1,12 +1,8 @@
 Rails.application.routes.draw do
-
-
+	
+  resources :messages
   resources :users, only: [:index, :show, :create]
  	resources :sessions, :only => [:new, :create, :destroy]
-	
-  get 'signin' => 'sessions#new'
-  get '/signout' => 'sessions#destroy'
-	get '/signup' => 'users#new' # TODO JULES : mettre ton vrai lien d'inscription #!/login
 	
 	root 'welcome#index'	
 	get '/api' => 'application#api', defaults: { format: :json }

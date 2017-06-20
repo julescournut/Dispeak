@@ -19,5 +19,6 @@
 //= require angular-material/angular-material
 //= require angular-hotkeys/build/hotkeys
 //= require angular-route/angular-route
+//= require angular-messages/angular-messages
 //= require angular-rails-templates
 //= require_tree .

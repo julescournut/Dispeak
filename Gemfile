@@ -58,3 +58,4 @@ gem 'bower-rails'
 gem 'angular-rails-templates'
 
 ruby "2.3.1"
+gem 'devise'

@@ -3,3 +3,4 @@ asset 'angular-material'
 asset 'angular-resource'
 asset 'angular-hotkeys', "1.7.0", github: "chieffancypants/angular-hotkeys"
 asset 'angular-route'
+asset 'angular-messages'
