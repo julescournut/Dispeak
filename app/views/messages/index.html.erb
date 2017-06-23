@@ -1,24 +1,26 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Messages</h1>
+<h1>Zone de chat textuel</h1>
 
 <table>
   <thead>
     <tr>
-      <th>Body</th>
-      <th>User</th>
-      <th colspan="3"></th>
+      <th></th>
+      <th></th>
+      <th colspan="8"></th>
     </tr>
   </thead>
 
   <tbody>
     <% @messages.each do |message| %>
       <tr>
+        <td><%= message.user.name %>:</td>
         <td><%= message.body %></td>
-        <td><%= message.user %></td>
+        <!--
         <td><%= link_to 'Show', message %></td>
         <td><%= link_to 'Edit', edit_message_path(message) %></td>
         <td><%= link_to 'Destroy', message, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+-->
       </tr>
     <% end %>
   </tbody>
@@ -26,4 +28,4 @@
 
 <br>
 
-<%= link_to 'New Message', new_message_path %>
+<%= link_to 'Ecrire', new_message_path %>

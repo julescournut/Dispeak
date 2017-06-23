@@ -6,7 +6,7 @@ Devise.setup do |config|
   # confirmation, reset password and unlock tokens in the database.
   # Devise will use the `secret_key_base` as its `secret_key`
   # by default. You can change it below and use your own secret key.
-  # config.secret_key = 'a051b93990b5d6554709973c18702f8d1d9c53b9ebfb157bb8d7f265c14d9a46332ffd18e7d14c12b82a0514618e442e946957d31c72c5d96371c52b2666f74a'
+  # config.secret_key = 'ce1f980efd384b3325ac38659f31e6753f27d988ae0a1beb8eb4ff5a995881222a8a2e3ac354f5d2f0620ce4b43cc2452a4cd48a749a59d98adb78bf90e89780'
 
   # ==> Mailer Configuration
   # Configure the e-mail address which will be shown in Devise::Mailer,
@@ -108,7 +108,7 @@ Devise.setup do |config|
   config.stretches = Rails.env.test? ? 1 : 11
 
   # Set up a pepper to generate the hashed password.
-  # config.pepper = 'e27e1bbcc99761ff6797c6890d714624572298f1dfb0af8e7bbc2116861f5fcb59b89a836a1f670a8463479cb5728055e2bc056479132375dab9db19ab241e42'
+  # config.pepper = 'd9bc0c62c29136bafa186bceb62ffe2887a6991e7e7db6705949751630ed8850070e4c79be425e33e586e210c81746ab6068ddd61e51592a987df8b77344da59'
 
   # Send a notification to the original email when the user's email is changed.
   # config.send_email_changed_notification = false
@@ -136,7 +136,7 @@ Devise.setup do |config|
   # initial account confirmation) to be applied. Requires additional unconfirmed_email
   # db field (see migrations). Until confirmed, new email is stored in
   # unconfirmed_email column, and copied to email column on successful confirmation.
-  config.reconfirmable = true
+  config.reconfirmable = false
 
   # Defines which key will be used when confirming an account
   # config.confirmation_keys = [:email]
@@ -242,7 +242,7 @@ Devise.setup do |config|
   # should add them to the navigational formats lists.
   #
   # The "*/*" below is required to match Internet Explorer requests.
-  # config.navigational_formats = ['*/*', :html]
+  config.navigational_formats = [:json]
 
   # The default HTTP method used to sign out a resource. Default is :delete.
   config.sign_out_via = :delete

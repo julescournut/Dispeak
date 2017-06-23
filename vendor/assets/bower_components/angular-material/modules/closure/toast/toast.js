@@ -1,8 +1,8 @@
 /*!
- * Angular Material Design
+ * AngularJS Material Design
  * https://github.com/angular/material
  * @license MIT
- * v1.1.3
+ * v1.1.4
  */
 goog.provide('ngmaterial.components.toast');
 goog.require('ngmaterial.components.button');
@@ -382,7 +382,7 @@ function MdToastProvider($$interimElementProvider) {
 
         if (shouldAddWrapper) {
           // Root element of template will be <md-toast>. We need to wrap all of its content inside of
-          // of <div class="md-toast-content">. All partials provided here should be static, developer-controlled
+          // of <div class="md-toast-content">. All templates provided here should be static, developer-controlled
           // content (meaning we're not attempting to guard against XSS).
           var templateRoot = document.createElement('md-template');
           templateRoot.innerHTML = template;

@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Audio Records</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>B64field</th>
+      <th>User</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @audio_records.each do |audio_record| %>
+      <tr>
+        <td><%= audio_record.b64field %></td>
+        <td><%= audio_record.user %></td>
+        <td><%= link_to 'Show', audio_record %></td>
+        <td><%= link_to 'Edit', edit_audio_record_path(audio_record) %></td>
+        <td><%= link_to 'Destroy', audio_record, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Audio Record', new_audio_record_path %>

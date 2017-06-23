@@ -1,20 +1,30 @@
 # Place all the behaviors and hooks related to the matching controller here.
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
+
+
 app = angular.module('app',[
   'ngMaterial',
   'ngResource',
   'cfp.hotkeys',
   'ngRoute',
   'ngMessages',
-  'templates'
+  'templates',
+  'ng-token-auth',
+  'isiUser',
+  'pusher-angular'
 ])
 
 app.config([
   '$routeProvider',
   '$mdThemingProvider',
-  ($routeProvider, $mdThemingProvider) ->
+  '$authProvider',
+  ($routeProvider, $mdThemingProvider, $authProvider) ->
 
+    authenticateRoute = ($auth, $location)  ->
+      return $auth.validateUser().catch (res)->
+        $location.path('/login')
+  
     $routeProvider
       .when '/login',
         templateUrl: 'login.html'
@@ -23,6 +33,13 @@ app.config([
       .when '/signup',
         templateUrl: 'signup.html'
         controller: 'SignupController'
+        
+      .when '/chat',
+        templateUrl: 'chat.html'
+        controller: 'ChatController'
+        resolve: 
+          auth: authenticateRoute
+        
 
     pastBlueMap = $mdThemingProvider.extendPalette 'blue', {
       '500': '#5F767F',
@@ -37,45 +54,119 @@ app.config([
       .primaryPalette 'pastBlue',
         'default': '500'
 
+  
+    $authProvider.configure({
+      apiUrl: '',
+      storage: 'localStorage'      
+  })
 ]);
 
 
-app.controller('LoginController', [ '$scope' , '$resource', ($scope, $resource)->
-  User = $resource('/users/:userId', { userId : "@id", format: 'json'},
-    { 'create': {method: 'POST'} }
-  )
+
+app.controller('ChatController', [ '$scope' , '$resource', '$auth', '$location', 'UserProvider', '$pusher', 'hotkeys', '$anchorScroll', '$timeout', ($scope, $resource, $auth, $location, UserProvider, $pusher, hotkeys, $anchorScroll, $timeout)->
+  
+  client = new Pusher('4ce30a88ba48b2442267', {
+      cluster: 'eu',
+      encrypted: true
+  })
+  pusher = $pusher(client)
+  Message = $resource('/messages/:messageID', {messageID: '@id'}, {
+    getAll: {
+      url: '/messages',
+      method: 'GET',
+      isArray: true
+    }  
+  })
+  
+  $scope.openMenu = ($mdMenu, ev) -> 
+    originatorEv = ev;
+    $mdMenu.open(ev);
+  
+  $scope.goBottom= () ->
+    $timeout( () ->
+        $location.hash("last")
+        $anchorScroll()
+    , 0)
+
+  
+  $scope.send = ->
+    message = {body: $scope.message}
+    message.user = UserProvider.getUser()
+    $scope.messages.push(message)
+
+    Message.save(message)
+    $scope.message = ''
+    $auth.validateUser()
+      
+  $scope.messages = []
+  Message.getAll (data) ->
+    $scope.messages = data
+  
+  pusher.subscribe('general-channel')
+  pusher.bind 'new-message', (data) ->
+    if data.user.uid != UserProvider.getUser().uid
+      $scope.messages.push(data)
     
-
-#  User.query(keywords: null, (results)-> $scope.users = results)
-
-#  $scope.save = ->
-#    promise = User.create({user: {name: $scope.name}})
-#    promise.$promise.then (model) ->
-#      $scope.users.push(model)
-#    $scope.name = null
+             
+  
+  $scope.curUser = UserProvider.getUser()
+  
+  $scope.logout = ->
+    $auth.signOut()
+    .then (resp) ->
+       $location.path('/login')
+       
 
   document.getElementsByTagName("body")[0].classList.add("blue-background");
 ])
 
-app.controller('SignupController', [ '$scope' , '$resource', '$mdDialog', ($scope, $resource, $mdDialog)->
-  User = $resource('/users/:userId', { userId : "@id", format: 'json'},
-    { 'create': {method: 'POST'} }
-  )
+
+app.controller('LoginController', [ '$scope' , '$resource', '$auth', '$location', ($scope, $resource, $auth, $location)->
+    
+  $scope.submitLogin = (loginForm) ->
+    $auth.submitLogin(loginForm)
+    .then (resp) -> 
+      $location.path('/chat')
+    .catch (resp) ->
+        $scope.error_bool = true
+        if (typeof resp is 'object')
+          $scope.error = resp
+        else
+          $scope.error = {errors: {full_messages: ["Server fatal error"]}}
+
+  document.getElementsByTagName("body")[0].classList.add("blue-background");
+])
+
+app.controller('SignupController', [ '$scope' , '$resource', '$mdDialog', '$auth', '$location', '$mdToast', ($scope, $resource, $mdDialog, $auth, $location, $mdToast) ->
 
   $scope.status = '  '
   $scope.customFullscreen = false
+  $scope.user_info={}
 
-  User.query(keywords: null, (results)-> $scope.users = results)
-
-  $scope.save = ->
-    promise = User.create({user: {name: $scope.name, email: $scope.email, password: $scope.password}})
-    promise.$promise.then (model) ->
-      $scope.users.push(model)
+  $scope.save = (registrationForm) ->
+    $auth.submitRegistration(registrationForm)
+    .then (resp) ->
+      $scope.user_info= {email: registrationForm.email, password: registrationForm.password}
+      $auth.submitLogin($scope.user_info)
+      .then (resp) ->
+        $location.path('/chat')
+        $mdToast.show(
+          $mdToast.simple().textContent('You\'ve been successfully registered and logged in.')
+        )
+      .catch (resp) ->
+        $scope.error_bool = true
+        if (typeof resp is 'object')
+          $scope.error = resp.data
+        else
+          $scope.error = {errors: {full_messages: ["Server fatal error"]}}
+    .catch (resp) ->
+        $scope.error_bool = true
+        if (typeof resp is 'object')
+          $scope.error = resp.data
+        else
+          $scope.error = {errors: {full_messages: ["Server fatal error"]}}
 
   $scope.showAlert = (ev)->
-# Appending dialog to document.body to cover sidenav in docs app
-# Modal dialogs should fully cover application
-# to prevent interaction outside of dialog
     if ($scope.projectForm.$valid)
       $mdDialog.show (
         $mdDialog.alert()
@@ -91,6 +182,19 @@ app.controller('SignupController', [ '$scope' , '$resource', '$mdDialog', ($scop
   document.getElementsByTagName("body")[0].classList.add("blue-background");
 ])
 
-
+app.run ['$auth', '$rootScope', 'UserProvider', ($auth, $rootScope, UserProvider) ->
+  $rootScope.$on 'auth:login-success', (ev, user) -> 
+     UserProvider.login(user)              
+  
+  $rootScope.$on 'auth:logout-success', (ev) ->
+    UserProvider.logout
+    
+  $rootScope.$on 'auth:validation-success', (ev, user) -> 
+    UserProvider.login(user)              
+    
+  $rootScope.$watch 'assets', (value) ->
+    if value 
+       $rootScope.assets = JSON.parse(String(value).replace(/&quote;/ig,'"'))
+]
 
 

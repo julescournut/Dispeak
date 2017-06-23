@@ -1,0 +1,60 @@
+<div layout="row">
+    <div layout="column" class="chat-col1">
+        <div class="dispeak-logo">
+            <img ng-src={{::assets['chat_dispeak_logo.png']}} width="100" height="100">
+        </div>
+        <div class="conv-name-container">
+            <a href="" class="conv-name">General Channel</a>
+        </div>
+        <div class="profil-status" layout="row">
+            <div layout="column" class="icon-container">
+              <md-menu>
+                  <md-icon ng-click="openMenu($mdMenu, $event)" class="isi-icon logout" style="color: #5F767F;">account_circle</md-icon>
+                <md-menu-content width="4">
+                  <md-menu-item>
+                    <md-button ng-click="logout()">
+                      Logout
+                    </md-button>
+                  </md-menu-item>
+                </md-menu-content>
+              </md-menu>
+            </div>
+            
+            <div layout="column" class="profile-name">
+                {{curUser.name}}
+            </div>
+        </div>
+    </div>
+    <div layout="column" class="chat-col2">
+           <div class="chat-container">
+               <div ng-repeat="msg in messages" ng-init="$last ? goBottom() : null">
+                  <div layout="row" class="message" id="{{$last ? 'last' : ''}}">
+                    <div layout="column" class="icon-container">
+                        <md-icon class="isi-icon" ng-if="curUser.id == msg.user.id" style="color: #5F767F;">account_circle</md-icon>
+                        <md-icon class="isi-icon" ng-if="curUser.id != msg.user.id">account_circle</md-icon>
+                    </div>
+                    <div layout="column" class="msg-content">
+                        <div layout="row" class="msg-name">
+                            {{msg.user.name}}
+                        </div>
+                        <div layout="row" class="msg">
+                            {{msg.body}}
+                        </div>
+                    </div>
+                  </div>
+                  <hr>
+                </div>
+            </div>
+            <form ng-submit="send()">
+              <div class="chat-input-container">
+                <md-input-container md-no-float class="md-block chat-input">
+                    <input autocomplete="off" class="chat-input" type="text" ng-model="message" placeholder="Send your message">
+                </md-input-container>
+              </div>
+            </form>
+
+
+    </div>
+</div>
+
+
