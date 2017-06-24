@@ -1,6 +1,8 @@
 # README
+
 Communication webapp ( register / login / send messages )
 Application using Ruby on Rails & Javascript. 
+
 Uses Devise Token Auth to register & login users.
 Uses pusher to notify & update messages instantly
 
@@ -18,4 +20,8 @@ Uses pusher to notify & update messages instantly
 * Developped on Codeanywhere => Container Ubuntu Rails & JS
 
 # How to run ?
-./start.sh (change default port in it aswell )
+cd "path/to/project"
+
+rake db:migrate
+
+./start.sh (change default port in it aswell )   OR   rails s   (if your system can run app on port 3000)
