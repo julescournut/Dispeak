@@ -1,24 +1,21 @@
 # README
+Communication webapp ( register / login / send messages )
+Application using Ruby on Rails & Javascript. 
+Uses Devise Token Auth to register & login users.
+Uses pusher to notify & update messages instantly
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+# Versions
+* Ruby version >= 2.2
+* Rails 4.X
+* Angular 1
 
-Things you may want to cover:
+# System dependencies
+* gem ['devise'](https://github.com/plataformatec/devise)
+* gem ['devise-token-auth'](https://github.com/lynndylanhurley/devise_token_auth)
+* [pusher](https://pusher.com/docs/javascript_quick_start)
 
-* Ruby version
+# Configuration
+* Developped on Codeanywhere => Container Ubuntu Rails & JS
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+# How to run ?
+./start.sh (change default port in it aswell )
