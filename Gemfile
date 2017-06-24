@@ -58,3 +58,7 @@ gem 'bower-rails'
 gem 'angular-rails-templates'
 
 ruby "2.3.1"
+gem 'devise'
+gem 'devise_token_auth'
+gem 'omniauth'
+gem 'pusher'

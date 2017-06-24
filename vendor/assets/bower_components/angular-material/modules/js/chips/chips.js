@@ -1,8 +1,8 @@
 /*!
- * Angular Material Design
+ * AngularJS Material Design
  * https://github.com/angular/material
  * @license MIT
- * v1.1.3
+ * v1.1.4
  */
 (function( window, angular, undefined ){
 "use strict";
@@ -1192,7 +1192,7 @@ MdChipsCtrl.prototype.contentIdFor = function(index) {
    * displayed as 'chips'. This component can make use of an `<input>` element or an 
    * `<md-autocomplete>` element.
    *
-   * ### Custom partials
+   * ### Custom templates
    * A custom template may be provided to render the content of each chip. This is achieved by
    * specifying an `<md-chip-template>` element containing the custom content as a child of
    * `<md-chips>`.
@@ -1423,13 +1423,13 @@ MdChipsCtrl.prototype.contentIdFor = function(index) {
    * MDChips Directive Definition
    */
   function MdChips ($mdTheming, $mdUtil, $compile, $log, $timeout, $$mdSvgRegistry) {
-    // Run our partials through $mdUtil.processTemplate() to allow custom start/end symbols
+    // Run our templates through $mdUtil.processTemplate() to allow custom start/end symbols
     var templates = getTemplates();
 
     return {
       template: function(element, attrs) {
         // Clone the element into an attribute. By prepending the attribute
-        // name with '$', Angular won't write it into the DOM. The cloned
+        // name with '$', AngularJS won't write it into the DOM. The cloned
         // element propagates to the link function via the attrs argument,
         // where various contained-elements can be consumed.
         attrs['$mdUserTemplate'] = element.clone();
@@ -1505,7 +1505,7 @@ MdChipsCtrl.prototype.contentIdFor = function(index) {
         })
         .join(',');
 
-      // Set the chip remove, chip contents and chip input partials. The link function will put
+      // Set the chip remove, chip contents and chip input templates. The link function will put
       // them on the scope for transclusion later.
       var chipRemoveTemplate   = getTemplateByQuery(chipRemoveSelector) || templates.remove,
           chipContentsTemplate = chipTemplate || templates.default,

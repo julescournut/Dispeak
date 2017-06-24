@@ -6,29 +6,224 @@
   padding-top: 100px;
 }
 
-body {  background-color : #5F767F;  }
+.blue-background {  background-color : #5F767F; overflow: hidden }
 
 .isi-card {
-  padding: 15px;
   border-radius: 3%;
+  margin: 0 !important;
+}
+
+.login-form {
+  padding: 15px;
+}
+
+.signup-form {
+  padding : 15px;
 }
 
 .top-input {
   margin-bottom: 0;
 }
 
+.mid-input{
+  margin: 0;
+}
+
 .bot-input {
   margin-top: 0;
+  margin-bottom: 10px;
 }
 
 .login-input {
-  width: 300px;
+  width: 350px;
+}
+
+.signup-input{
+  width: 500px;
+  margin-bottom: 10px;
 }
 
 .login-button {
-  padding-top: 15px;
+  margin-bottom: 20px;
   button {
     background-color : #5F767F !important;
     color: white !important;
+    width: 130px;
   }
+}
+
+.signup-button {
+  margin-bottom: 20px;
+  button {
+    background-color: #5F767F !important;
+    color: white !important;
+    width: 250px;
+  }
+}
+
+.form-header {
+  margin-top: 40px;
+  text-align: center;
+  font-size: 22px;
+  color: #5F767F;
+}
+
+.login-footer {
+  text-align: center;
+  padding: 20px;
+  display: block;
+  color: #878797;
+  font-weight: 100;
+  background-color: #f5f5f5;
+  border-top: 1px solid #dddddd;
+  border-bottom-right-radius: 15px;
+  border-bottom-left-radius: 15px;
+  &:hover {
+    background-color: #f5f5f5;
+    color: #878797;
+  }
+}
+
+a.login-footer {
+  text-decoration: none;
+}
+
+a.login-footer > span {
+  color: #5F767F;
+  text-decoration: underline;
+}
+
+.forgot-link {
+  margin-left: 5px;
+  text-align: center;
+  color: #5F767F;
+  text-decoration: none;
+  font-size: 12px;
+}
+
+.signup-link {
+  &:hover{
+    background-color: white;
+    color: #878797;
+  }
+}
+
+.signup-h3 {
+  color: #5F767F;
+}
+
+.signup-error {
+  color: red;
+}
+
+.login-error {
+  color: red;
+}
+
+.chat-col1 {
+  height: 100vh;
+  width: 15vw;
+  background-color: #2E2F30;
+}
+
+.chat-col2 {
+  height: 100vh;
+  width: 85vw;
+  background-color: #464646;
+}
+
+.chat-container {
+  height: 95vh;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+.chat-input-container {
+  padding: 10px;
+  background-color: #cdcdcd;
+}
+
+.chat-input {
+  margin: 0 !important;
+}
+
+.chat-input-container > md-input-container > .md-errors-spacer {
+  min-height: 0 !important;
+}
+
+hr {
+  display: block;
+  height: 1px;
+  border: 0;
+  border-top: 1px solid #2E2F30;
+  margin: 1em 1em 1em 1em;
+  padding: 0;
+}
+
+.message {
+  padding: 15px 15px 0 15px;
+}
+
+.msg-content {
+  margin-left: 10px;
+}
+
+.icon-container {
+  width: 50px;
+  height: 50px;
+}
+
+.isi-icon {
+  color: #cdcdcd;
+  font-size: 45px;
+  width: 100%;
+  height: 100%;
+  margin-top: 5px;
+}
+
+.msg-name {
+  margin-top: 3px;
+  font-size: 13px;
+  color: #cdcdcd;
+}
+
+.msg {
+  margin-top: 10px;
+  color: white;
+}
+
+.conv-name-container {
+  height: 86vh;
+}
+
+.profil-status {
+  padding: 0 10px 3px 10px;
+  background-color: #3F3F3F;
+}
+
+.profile-name {
+  color: #cdcdcd;
+  font-size: 20px;
+  margin: 18px 0 0 5px;
+}
+
+.conv-name {
+  display: block;
+  padding: 15px;
+  background-color: #464646;
+  font-size: 15px;
+  color: #cdcdcd !important;
+  text-decoration: none;
+  &:hover {
+    background-color: #3D3D3D;
+  }
+}
+
+.dispeak-logo {
+  text-align: center;
+  margin: 10px 0 10px 0;
+}
+
+.logout {
+  cursor: pointer;
 }

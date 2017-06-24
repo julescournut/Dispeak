@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>B64field:</strong>
+  <%= @audio_record.b64field %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @audio_record.user %>
+</p>
+
+<%= link_to 'Edit', edit_audio_record_path(@audio_record) %> |
+<%= link_to 'Back', audio_records_path %>

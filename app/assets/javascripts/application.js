@@ -19,5 +19,10 @@
 //= require angular-material/angular-material
 //= require angular-hotkeys/build/hotkeys
 //= require angular-route/angular-route
+//= require angular-messages/angular-messages
+//= require angular-cookie/angular-cookie
+//= require ng-token-auth/dist/ng-token-auth
+//= require pusher/dist/web/pusher
+//= require pusher-angular/lib/pusher-angular
 //= require angular-rails-templates
 //= require_tree .
